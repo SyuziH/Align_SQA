@@ -5,22 +5,21 @@ from selenium.webdriver.common.by import By
 
 def locate_with_xpaths():
     driver = webdriver.Chrome()
-
     driver.get("https://www.demoblaze.com/")
 
-    header1_xpath = "//a[@id='login2']"
-    header2_xpath = "//a[@class='login4']"
+    x_paths = {}
+    x_paths['Home'] = "//span[@class='sr-only']"
+    x_paths['Contact'] = "//a[@data-target='#exampleModal']"
+    x_paths['About us'] = "//a[@data-target='#videoModal']"
+    x_paths['Cart'] = "//a[@id='cartur']"
+    x_paths['Log in'] = "//a[@id='login2']"
+    x_paths['Sign up'] = "//a[@id='signin2']"
 
-    try:
-        header1 = driver.find_element(By.XPATH, header1_xpath)
-        print("Element is located: " + header1.text)
-    except NoSuchElementException:
-        print("No Such Element: " + header1_xpath)
-
-    try:
-        header2 = driver.find_element(By.XPATH, header2_xpath)
-        print("Element is located: " + header2.text)
-    except NoSuchElementException:
-        print("No Such Element: " + header2_xpath)
+    for key, value in x_paths.items():
+        try:
+            driver.find_element(By.XPATH, value)
+            print(f'Element is located: {key}')
+        except NoSuchElementException:
+            print(f'No Such Element: {key}')
 
     driver.quit()
